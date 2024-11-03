@@ -1,4 +1,5 @@
--- mystuff c
+local telescope = require("telescope")
+--n- mystuff c
 -- general configs
 vim.o.conceallevel = 2
 require("lspconfig").intelephense.setup({})
@@ -192,30 +193,56 @@ local harpoon = require("harpoon")
 harpoon:setup()
 -- REQUIRED
 
-vim.keymap.set("n", "<leader>ua", function()
+vim.keymap.set("n", "<leader>ha", function()
 	harpoon:list():add()
 end)
-vim.keymap.set("n", "<leader>ul", function()
+vim.keymap.set("n", "<leader>h;", function()
 	harpoon.ui:toggle_quick_menu(harpoon:list())
 end)
 
-vim.keymap.set("n", "<leader>um", function()
+vim.keymap.set("n", "<leader>hm", function()
 	harpoon:list():select(1)
 end)
-vim.keymap.set("n", "<leader>u,", function()
+vim.keymap.set("n", "<leader>h,", function()
 	harpoon:list():select(2)
 end)
-vim.keymap.set("n", "<leader>u.", function()
+vim.keymap.set("n", "<leader>h.", function()
 	harpoon:list():select(3)
 end)
-vim.keymap.set("n", "<leader>uj", function()
+vim.keymap.set("n", "<leader>hj", function()
 	harpoon:list():select(4)
 end)
+vim.keymap.set("n", "<leader>hk", function()
+	harpoon:list():select(5)
+end)
 
+vim.keymap.set("n", "<leader>hl", function()
+	harpoon:list():select(6)
+end)
+vim.keymap.set("n", "<leader>hu", function()
+	harpoon:list():select(7)
+end)
+vim.keymap.set("n", "<leader>hi", function()
+	harpoon:list():select(8)
+end)
+vim.keymap.set("n", "<leader>ho", function()
+	harpoon:list():select(9)
+end)
 -- Toggle previous & next buffers stored wituin Harpoon list
-vim.keymap.set("n", "<leader>uw", function()
+vim.keymap.set("n", "<leader>hw", function()
 	harpoon:list():prev()
 end)
-vim.keymap.set("n", "<leader>ur", function()
+vim.keymap.set("n", "<leader>hr", function()
 	harpoon:list():next()
 end)
+vim.api.nvim_set_keymap("v", "<C-c>", '"+y', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<C-x>", '"+d', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-P>", ":Telescope find_files<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-V>", '"+p', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<M-k>", ":lua vim.lsp.buf.type_definition()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap(
+	"n",
+	"<leader>sa",
+	":lua require('telescope.builtin').lsp_document_symbols({ symbols = 'Function' })<CR>",
+	{ desc = "Search Function", noremap = true, silent = true }
+)
